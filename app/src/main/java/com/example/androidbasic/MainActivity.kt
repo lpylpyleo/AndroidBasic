@@ -2,6 +2,7 @@ package com.example.androidbasic
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidbasic.databinding.ActivityMainBinding
 import com.example.androidbasic.ui.counter.CounterActivity
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: ")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -26,7 +28,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NoteActivity::class.java))
         }
         binding.tabButton.setOnClickListener {
-            startActivity(Intent(this, TabActivity::class.java))
+            startActivity(Intent(this, BilibiliActivity::class.java))
         }
+    }
+
+    companion object{
+        private const val TAG = "MainActivity"
     }
 }

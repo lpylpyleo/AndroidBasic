@@ -1,13 +1,12 @@
 package com.example.androidbasic.ui.player
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.androidbasic.data.model.Video
 import com.example.androidbasic.databinding.ActivityPlayerBinding
 import com.example.androidbasic.util.ObjectWrapperBinder
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.MediaItem
 
 class PlayerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayerBinding
@@ -21,12 +20,19 @@ class PlayerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: ")
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel.setupPlayer(baseContext, binding)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.destroyPlayer()
+    }
+
     companion object {
-        val ARG_VIDEO_BVID = "ARG_VIDEO_BVID"
+        const val ARG_VIDEO_BVID = "ARG_VIDEO_BVID"
+        private const val TAG = "PlayerActivity"
     }
 }
