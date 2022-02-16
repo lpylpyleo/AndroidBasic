@@ -22,7 +22,7 @@
             android:exported="false" />
         <activity
             android:name=".BilibiliActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_tab"
             android:theme="@style/Theme.AndroidBasic.NoActionBar" />
         <activity

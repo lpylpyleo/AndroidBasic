@@ -12,7 +12,6 @@ import com.example.androidbasic.databinding.ActivityPlayerBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
 import kotlinx.coroutines.launch
 
@@ -45,7 +44,6 @@ class PlayerViewModel(private val repository: VideoRepository, private val video
             player.play()
             Log.d(TAG, "setupPlayer: play")
         }
-
     }
 
     fun destroyPlayer() {
@@ -54,7 +52,7 @@ class PlayerViewModel(private val repository: VideoRepository, private val video
         _player = null
     }
 
-    companion object{
+    companion object {
         private const val TAG = "PlayerViewModel"
     }
 }

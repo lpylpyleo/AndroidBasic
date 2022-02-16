@@ -1,15 +1,19 @@
 package com.example.androidbasic
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.example.androidbasic.databinding.ActivityBilibiliBinding
+import com.example.androidbasic.ui.main.SectionsPagerAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
-import com.example.androidbasic.ui.main.SectionsPagerAdapter
-import android.view.inputmethod.InputMethodManager
-import com.example.androidbasic.databinding.ActivityBilibiliBinding
+import java.lang.reflect.Field
 
 
 class BilibiliActivity : AppCompatActivity() {
@@ -37,12 +41,24 @@ class BilibiliActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action") { println("tap") }.show()
         }
+        getTypeFaces()
     }
 
     override fun onUserInteraction() {
         if (currentFocus != null) {
             val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        }
+    }
+
+    @SuppressLint("DiscouragedPrivateApi")
+    private fun getTypeFaces(){
+        val typeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
+        val f: Field = Typeface::class.java.getDeclaredField("sSystemFontMap")
+        f.isAccessible = true
+        val sSystemFontMap = f.get(typeface) as Map<*, *>
+        for ((key, value) in sSystemFontMap.entries) {
+            Log.d("FontMap", "$key ---> $value\n")
         }
     }
 }
